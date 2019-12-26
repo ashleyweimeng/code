@@ -1,0 +1,334 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta content="telephone=no" name="format-detection" />
+	    <meta content="email=no" name="format-detection" />
+	    <title>财新|XXXX</title>
+		<script src="js/jquery-1.7.2.min.js" language="javascript"></script>
+		<script src="js/d3.min.js" language="javascript"></script>
+		<script src="js/jquery.color.js" language="javascript"></script>
+
+		<!-- 用户收费逻辑第一部分 开始 -->
+		<!--<script>
+			var srcinfoid = 101192857;
+			window.entity = {"srcinfoid":101192857, "fromchannel":"16, 22"};
+
+			function IsPC()
+			{   
+				var flag = true;  
+				var userAgentInfo = navigator.userAgent;  
+				var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"); 
+
+				for (var v = 0; v < Agents.length; v++)
+				{  
+					if (userAgentInfo.indexOf(Agents[v]) > 0)
+					{
+						flag = false; break;
+					}  
+				} 
+
+				return flag;  
+			}
+
+			if(IsPC())
+			{
+				document.write('<link rel="stylesheet" type="text/css" href="http://file.caixin.com/webchannel/all/css/dist/content.css"\/>');
+				document.write('<link rel="stylesheet" type="text/css" href="http://file.caixin.com/webchannel/article/newart.css" \/>');
+				document.write('<script src="http://file.caixin.com/webjs/content/newspe_pageBar.js"><\/script>');
+				document.write('<script src="http://file.caixin.com/webjs/content/pagebar_v7_test_v2.js"><\/script>');
+			}
+			else
+			{
+				document.write('<link rel="stylesheet" type="text/css" href="https://files.caixin.com/webchannel/article/wapnewart.css" \/>');
+				document.write('<script src="http://file.caixin.com/webjs/content/newspe_pageBar.js"><\/script>');
+				document.write('<script src="http://file.caixin.com/webjs/content/pagebar_m2_test_v2.js"><\/script>');
+			}
+    	</script>-->
+		<!-- 用户收费逻辑第一部分 结束 -->
+
+	</head>
+	<style>
+		body,button,dd,dl,dt,form,h1,h2,h3,h4,h5,h6,hr,input,li,ol,p,td,textarea,th,ul{margin:0;padding:0}
+		body{font-size:16px; font-family: '微软雅黑','PingFang SC','Droidsansfallback';color:#000;background:#F8F8F8; overflow-x: hidden; }
+		img{vertical-align:top;}
+		a img{border:none;}
+		a{color:#5d3a88;text-decoration:none;outline-style:none;}
+		var,em{font-style:normal}
+		ul,li{list-style:none}
+		.mobile-only{display: none}
+		.pc-only{display: block;}
+		.cx-logo{position: absolute; top:5px; left: 5px; width: 56px; height: 40px; background-image: url(images/caixin.png); z-index: 999}
+		.cover{width: 100%; height: 100%; position: relative; text-align: center; background-color: #bbb; color: #fff; font-size: 100px; line-height: 500px}
+		.cover-bg{ position: absolute; z-index: -1; top:0; left:0; width: 1200px; height: auto}
+		.cover-bg img{position: absolute; display: none; }
+		.content-div{padding-top: 10px; padding-bottom: 10px; position: relative; width: 100%; height: auto}
+		.content-wrap{width: 640px; margin:0 auto; font-size: 16px; line-height: 28px; text-align: left;}
+		.content-wrap p{padding-top: 15px; padding-bottom: 15px}
+		.content-wrap .subtitle span{border-bottom: 2px #000 solid; padding-bottom: 4px; font-weight: 900}
+		.content-wrap .subtitle{color:#000; font-size: 16px; text-align: center; }
+		.content-wrap .caption{color:#333; font-size: 12px; line-height: 20px; width: 70%; margin:0 auto;}
+		
+		.chart-div{width: 990px; height: 500px; position: relative; margin: 0 auto; overflow: hidden; border:#bbb 1px solid;}
+
+		.chart-scroll-wrap{width: 990px; height: 500px; position: relative; margin: 0 auto; overflow-x: hidden; border:#bbb 1px solid;}
+		.chart-scroll-horizontal{width: 990px; height: 100%; position: relative; background-image: url(images/caixin.png); opacity: 0.3}
+
+		.credits{width: 100%; float: left; position: relative; text-align: center; font-size: 12px; line-height: 18px; padding-bottom: 40px; padding-top: 30px }
+		.credits p{width: 440px; margin: 0 auto; padding-bottom: 7px; font-weight: 400; color:#999;}
+		.credits p b{font-weight: 900}
+		.credits p.first{border-top: #999 1px solid; height: 30px; width: 640px}
+
+
+
+		
+		@media (max-width: 640px){
+			body{overflow-x: hidden;}
+			.mobile-only{display: block}
+			.pc-only{display:none;}
+			
+			.content-wrap{width: 90%; margin:0 auto; font-size: 16px; line-height: 28px; text-align: left;overflow-x: hidden;}
+			.chart-div{width: 90%;overflow-x: hidden; margin:0 auto;}
+			.chart-scroll-wrap{width: 90%; margin:0 auto;}
+			.chart-scroll-wrap{ overflow-x: scroll; }
+			.credits p{width: 100%; font-size: 12px}
+			.credits p.first{width: 80%;padding-left: 10%}	
+
+			.chart-scroll-wrap .tip{position: absolute; z-index:1000; background-image: url(images/scroll-tip.png); width: 120px; height:80px; background-size: 100% auto; top:200px;}
+			.chart-scroll-wrap .tip .hand{animation:moveLeft 2s infinite linear; -webkit-animation:moveLeft 2s infinite linear; position: absolute;}
+			@keyframes moveLeft{
+				0%{right:-20px;}
+				70%{right:60px;}
+				100%{right:60px;}
+			}
+			@-webkit-keyframes moveLeft{
+				0%{right:-20px;}
+				70%{right:60px;}
+				100%{right:60px;}
+			}
+			
+		}
+	
+	</style>
+	<body>
+		<!-- 用户收费逻辑第二部分 开始 -->
+		<!--
+		<div id="chargeWall" class="payreadwarp" style="opacity: 0.92">
+			<div class="content"></div>
+		</div>
+		<div id="pay-box" class="mask">
+			<div class="dialoguebox">
+				<em class="maskclose"></em>
+				<div class="middle">
+					<p></p>
+					<div class="middlewarn"></div>
+					<div class="types"></div>
+				</div>
+			</div>
+		</div>
+		<script>buildContentInfo();</script> -->
+		<!-- 用户收费逻辑第二部分 结束 -->
+		
+	
+	<a href="http://www.caixin.com"><div class="cx-logo"></div></a>
+	<div class="cover">		
+		封面
+	</div>
+	<div class="content-div">
+		<div class="content-wrap">
+			<p>比起行政面积，也许<span class="highlight">出行半径</span>更能描述市民日常实际活动范围。滴滴媒体研究院利用滴滴出行平台订单数据对全国主要城市的出行半径进行“测量”，从一个侧面反映城市究竟有“多大”。</p>
+			<p><span class="highlight">毫不意外的，北京的出行半径最大，31.7公里。</span>也就是说，北京90%的出行订单的起点或终点在距离市中心（天安门）31.7公里的范围内，而从天安门开车到东六环，刚好是30公里。</p>
+			<p>中国城市中，出行半径大于30公里的有4个：北京、上海、深圳和佛山。</p>
+		</div>
+	</div>
+	<div class="content-div">
+		<div class="content-wrap">
+			<p class="subtitle"><span>仿制药和专利药的价格对比</span></p>
+			<p class="caption">注：<span class="highlight">“出行半径”</span>：若超过90%的出行起点或终点与城市中心的距离在R公里范围内，则定义城市半径为R（单位：公里），即大多数出行活动的起终点都在城市半径R范围内。</p>
+		</div>
+	</div>
+	<div class="chart-div" ></div>
+	<div class="content-div">
+		<div class="content-wrap">
+			<p>工作在北京东四环外传媒产业园的张扬，两年前把房子买在了南六环，每天开车上班单程需要近一个半小时；</p>
+			<p>上海的姗姗在市中心的一家日企工作，家住长宁区的她每天要乘地铁上下班，单程三站地，加上走路全程需要近40分钟。</p>			
+			<p>一个城市有多大？看看上班族上下班要花的时间。这是衡量“城市有多大”的另一个维度：通勤。</p>
+			<p>如上所述的出行半径是一个静态的直线距离，它并不能体现出城市形态、城市规划、拥堵状况等因素。而<span class="highlight">平均通勤距离和时间则可以帮助我们融合更多的路面信息和生活体验，从而更好地感知一个城市到底有多大。</span></p>
+		</div>
+	</div>
+	<div class="content-div">
+		<div class="content-wrap">
+			<p class="subtitle"><span>很宽的图(PC通栏显示，移动左右滑动)</span></p>
+		</div>
+	</div>
+	<div class="chart-scroll-wrap">
+		<div class="chart-scroll-horizontal"></div>
+		<div class="mobile-only tip">
+			<div class="hand"><img src="images/hand.png" width="60"></div>
+		</div>
+	</div>
+	
+
+	<div class="content-div">
+		<div class="content-wrap">
+			<p>令人惊讶的是，广东东莞的平均通勤距离和时间分别为17.3公里和48.5分钟，超过了上海、广州、深圳这些一线城市，仅次于北京。早高峰期间，从东莞住宅区发出的订单中很大一部分会进入了深圳、广州、惠州等周边城市。这便不难理解，为何出行半径并不显著的东莞，会在通勤排行上如此高位。</p>
+			
+		</div>
+	</div>
+	<div class="content-div">
+		<div class="content-wrap">
+			<p class="subtitle"><span>中国的制药现状</span></p>
+		</div>
+	</div>
+	<div class="chart-div" ></div>
+	
+	<div class="content-div">
+		<div class="content-wrap">			
+			<p>东莞北接广州，南连深圳，毗邻香港，是粤港澳大湾区的重要组成部分，据媒体报道，在东莞凤岗停满大量的粤B牌轿车，早高峰期间人流也几乎全部涌向深圳方向，珠三角一体化程度高，城市间连通性也极高，因而，在地域上仅用“行政区域”来描述生活区域便不够准确，这便引出另一个概念，<span class="highlight">“城市功能地域”。</span> </p>
+		</div>
+	</div>
+	
+	<div class="credits">
+        <p class="first"></p>
+        <p><b>数据来源：</b>Q1medicare、EvaluatePharma</p>
+        <p>IFPMA（国际药品制造商协会联合会）</p>
+        <p>德勤《研发的新前景：衡量2017年医药创新回报》</p>
+        <p>国家统计局</p>
+        <p>&nbsp;</p>
+        <p><b>记者：</b>柳书琪（实习）</p>
+        <p><b>编辑：</b>耿铭钟</p>
+        <p><b>设计：</b>李靖华</p>
+        <p><b>开发：</b>韦梦 杜可涵（实习）</p>
+        <p><b>监制：</b>黄晨</p>
+        <p>财新数据新闻中心出品</p>
+        <p>&nbsp;</p>
+        <p class="mobile-only"><img src="images/qr1.png" width="40%"></p>
+      </div>  
+    </div>  	
+
+	
+</body>
+<script type="text/javascript">
+	var isMobile = $(window).width()>640?false:true;
+	var maxWIDTH = isMobile? $(window).width():990
+	var maxHEIGHT = $(window).height()
+	
+	var WIDTH = maxWIDTH
+	var HEIGHT = maxHEIGHT
+	var highlightFlag = [0,0,0,0,0]
+	$(document).scroll(function(){			
+		   
+			var top = $(document).scrollTop()
+			if(top>$(window).height()+100){
+				
+			}
+			
+			/* 高亮说明文字 */
+			for(var i=0; i<highlightFlag.length; i++){
+				var highlight = $(document).find(".highlight").eq(i).offset().top
+				if(top>highlight-$(window).height()*0.5){				
+					if(highlightFlag[i]==0){
+						$(document).find(".highlight").eq(i).animate({backgroundColor:'#ffe400'},1000)
+						highlightFlag[i]=1;
+					}
+				} 
+			}
+
+			
+
+	})
+
+	$(document).ready(function(){
+		if(isMobile) {
+			$(".chart-scroll-wrap").find(".tip").css("left",WIDTH*0.3)
+			$(".chart-scroll-wrap").bind("touchstart",function(){
+				$(this).find(".tip").fadeOut(500)
+			})
+		}
+	})
+
+
+	
+
+
+</script>
+<!-- 财新网客户端分享代码 -->
+<div style="display:none" id="__cxnewsapp_topbar">分享按钮是否显示的标志</div>
+<div style="display:none" id="__cxnewsapp_orientation">flexible</div>
+<div style="display:none" id="__cxnewsapp_sharetext">互动|从家乡返城务工的你，想没想过换个城市生活？</div>
+<div style="display:none" id="__cxnewsapp_sharephotourl">http://datanews.caixin.com/mobile/webjs/weixin.jpg</div>
+<div style="display:none" id="__cxnewsapp_sharewxurl">http://datanews.caixin.com/interactive/2018/from-city-to-city/index.html</div>
+<div style="display:none" id="__cxnewsapp_sharewxthumburl">http://datanews.caixin.com/mobile/webjs/weixin.jpg</div>
+<div style="display:none" id="__cxnewsapp_sharewxtitle">互动|从家乡返城务工的你，想没想过换个城市生活？</div>
+<div style="display:none" id="__cxnewsapp_sharewxtext">想要更宽广的舞台，亦或是舒适方便？城市大数据帮你选</div>
+
+<!-- 微信分享代码 -->
+<script src="http://datanews.caixin.com/mobile/webjs/jweixin-1.0.0.js"></script>
+<script src="http://datanews.caixin.com/mobile/webjs/get_wx_config.js"></script>
+<script>
+  
+    getWXConfig();
+
+    var imgUrl = "http://datanews.caixin.com/mobile/webjs/weixin.jpg";
+    var lineLink = "http://datanews.caixin.com/interactive/2018/from-city-to-city/index.html";
+    var shareTitle = '互动|从家乡返城务工的你，想没想过换个城市生活？';
+    var descContent = '想要更宽广的舞台，亦或是舒适方便？城市大数据帮你选';
+  
+    var appid = '';
+
+    wx.ready(function(){
+        wx.onMenuShareTimeline({
+            title: shareTitle, // 分享标题
+            link: lineLink, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function () {
+                // 用户下一步分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.onMenuShareAppMessage({
+            title: shareTitle, // 分享标题
+            desc: descContent, // 分享描述
+            link: lineLink, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户下一步分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.onMenuShareQQ({
+            title: shareTitle, // 分享标题
+            desc: descContent, // 分享描述
+            link: lineLink, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function () {
+                // 用户下一步分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.onMenuShareWeibo({
+            title: shareTitle, // 分享标题
+            desc: descContent, // 分享描述
+            link: lineLink, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function () {
+                // 用户下一步分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+ 
+</script>
+
+
+</html>
